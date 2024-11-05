@@ -75,7 +75,7 @@ export async function onRequestPost(context) {  // Contents of context object
     const uploadIp = request.headers.get("cf-connecting-ip") || request.headers.get("x-real-ip") || request.headers.get("x-forwarded-for") || request.headers.get("x-client-ip") || request.headers.get("x-host") || request.headers.get("x-originating-ip") || request.headers.get("x-cluster-client-ip") || request.headers.get("forwarded-for") || request.headers.get("forwarded") || request.headers.get("via") || request.headers.get("requester") || request.headers.get("true-client-ip") || request.headers.get("client-ip") || request.headers.get("x-remote-ip") || request.headers.get("x-originating-ip") || request.headers.get("fastly-client-ip") || request.headers.get("akamai-origin-hop") || request.headers.get("x-remote-ip") || request.headers.get("x-remote-addr") || request.headers.get("x-remote-host") || request.headers.get("x-client-ip") || request.headers.get("x-client-ips") || request.headers.get("x-client-ip")
     // 获得上传渠道
     const urlParamUploadChannel = url.searchParams.get('uploadChannel');
-    let uploadChannel = 'CloudflareR2';
+    let uploadChannel = env.DEFAULT_UPLOAD_CHANNEL || 'CloudflareR2';  // 使用环境变量或默认值
     switch (urlParamUploadChannel) {
         case 'telegram':
             uploadChannel = 'TelegramNew';
@@ -84,7 +84,7 @@ export async function onRequestPost(context) {  // Contents of context object
             uploadChannel = 'CloudflareR2';
             break;
         default:
-            uploadChannel = 'CloudflareR2';
+            uploadChannel = env.DEFAULT_UPLOAD_CHANNEL || 'CloudflareR2';  // 优先使用环境变量
             break;
     }
 
