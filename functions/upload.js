@@ -84,7 +84,7 @@ export async function onRequestPost(context) {  // Contents of context object
             uploadChannel = 'CloudflareR2';
             break;
         default:
-            uploadChannel = 'TelegramNew';
+            uploadChannel = 'CloudflareR2';
             break;
     }
 
